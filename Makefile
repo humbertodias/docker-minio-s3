@@ -1,5 +1,8 @@
 CERT_DIR=$(PWD)/config/certs
 
+ACCESS_KEY ?= CHANGEME
+SECRET_KEY ?= CHANGEME
+
 initial_structure:
 	mkdir -p config/certs data
 
@@ -7,7 +10,7 @@ private_key:	initial_structure
 	docker run --rm -v $(pwd):/tmp -w /tmp frapsoft/openssl \ 
 	openssl ecparam -genkey -name prime256v1 | openssl ec -out private.key
 
-public_key:	initial_structure
+public_key:	private_key
 	docker run --rm -v $(pwd):/tmp -w /tmp frapsoft/openssl \ 
 	openssl req -new -x509 -days 3650 \
 	-key private.key \
@@ -15,18 +18,20 @@ public_key:	initial_structure
 	-subj "/C=US/ST=state/L=location/O=organization/CN=<domain.com>"
 
 move_keys:
-	mv private.key ${CERT_DIR}
-	mv public.crt ${CERT_DIR}
+	mv private.key public.crt ${CERT_DIR}
 
-generate_keys: private_key	public_key	move_keys
+generate_keys:	public_key	move_keys
 
-start:
+env:
+	echo "ACCESS_KEY=${ACCESS_KEY}\nSECRET_KEY=${SECRET_KEY}" > .env
+
+up:	env
 	docker-compose up -d
 	@echo "Open https://localhost"
 
-stop:
+down:
 	docker-compose down
 
 clean:
-	rm -f private.key public.crt
+	rm -f private.key public.crt .env
 	rm -rf config data

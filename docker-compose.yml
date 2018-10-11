@@ -10,5 +10,5 @@ services:
     ports:
       - 443:443
     environment:
-      MINIO_ACCESS_KEY: YOURACCESSKEY
-      MINIO_SECRET_KEY: YOURSECRETKEY
+      MINIO_ACCESS_KEY: ${ACCESS_KEY}
+      MINIO_SECRET_KEY: ${SECRET_KEY}
