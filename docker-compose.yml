@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  minio-s3:
+    image: minio/minio
+    command: server --address ":443" /data
+    volumes:
+      - ./config:/root/.minio
+      - ./data:/data
+    ports:
+      - 443:443
+    environment:
+      MINIO_ACCESS_KEY: YOURACCESSKEY
+      MINIO_SECRET_KEY: YOURSECRETKEY
