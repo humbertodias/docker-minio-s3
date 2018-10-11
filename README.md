@@ -1,0 +1,1 @@
+# docker-minio-s3
