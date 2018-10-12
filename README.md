@@ -38,23 +38,22 @@ Configure
     SECRET_KEY=CHANGEME
     mc config host add s3 https://localhost $ACCESS_KEY $SECRET_KEY --api S3v4
 
-    Added `s3` successfully.
-
 Create a Bucket
 
-    mc mb s3/mybucket-from-mc
+    mc mb s3/mybucket-from-mc --insecure
 
 Copy
 
-    mc cp /etc/hosts s3/mybucket-from-mc
+    mc cp /etc/hosts s3/mybucket-from-mc --insecure
 
 List
 
-    mc ls s3
+    mc ls s3 --insecure
 
 Remove
 
-    mc rm --force --recursive s3/mybucket-from-mc/
+    mc rm --force --insecure s3/mybucket-from-mc/hosts
+    mc rm --force --insecure s3/mybucket-from-mc/
 
 ## Amazon
 

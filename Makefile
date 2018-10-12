@@ -28,6 +28,8 @@ env:
 up:	env
 	docker-compose up -d
 	@echo "Open https://localhost"
+	sleep 5
+	docker-compose logs
 
 down:
 	docker-compose down
