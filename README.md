@@ -40,9 +40,7 @@ Configure
 
     Added `s3` successfully.
 
-Commands
-
-New Bucket
+Create a Bucket
 
     mc mb s3/mybucket-from-mc
 
