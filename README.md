@@ -19,7 +19,47 @@ Simple docker service based on Minio server that is an Amazon S3 (Simple Storage
     make generate_keys
     make up
 
+If you want to change the keys ACCESS/SECRET, fill that before make up
+
+    ACCESS_KEY=CHANGEME
+    SECRET_KEY=CHANGEME
+
 # Client
+
+## Minio
+
+Install
+
+    brew install minio/stable/mc
+
+Config
+
+    ACCESS_KEY=CHANGEME
+    SECRET_KEY=CHANGEME
+    mc config host add s3 https://localhost $ACCESS_KEY $SECRET_KEY --api S3v4
+
+
+    Added `s3` successfully.
+
+Commands
+
+    New Bucket
+
+        mc mb s3/mybucket-from-mc
+    
+    Copy
+
+        mc cp /etc/hosts s3/mybucket-from-mc
+
+    List
+
+        mc ls s3
+
+    Remove
+
+        mc rm --force --recursive s3/mybucket-from-mc/
+
+## Amazon
 
 Install
 
@@ -27,28 +67,32 @@ Install
 
 Environment
 
-    AWS_ACCESS_KEY_ID=CHANGEME
-    AWS_SECRET_ACCESS_KEY=CHANGEME
+    export AWS_ACCESS_KEY_ID=CHANGEME
+    export AWS_SECRET_ACCESS_KEY=CHANGEME
 
 Create a bucket
     
-    aws --endpoint-url https://localhost s3 mb s3://mybucket --no-verify-ssl
+    aws --endpoint-url https://localhost s3 mb s3://mybucket-from-aws --no-verify-ssl
 
 Copy file to bucket
     
-    aws --endpoint-url https://localhost s3 cp /etc/hosts s3://mybucket --no-verify-ssl
+    aws --endpoint-url https://localhost s3 cp /etc/hosts s3://mybucket-from-aws --no-verify-ssl
 
 List
 
     aws --endpoint-url https://localhost s3 ls --no-verify-ssl
 
+Remove
+
+    aws --endpoint-url https://localhost s3 rm --recursive s3://mybucket-from-aws/ --no-verify-ssl
+
 
 # References
 
-* [Mino Server](https://hub.docker.com/r/minio/minio/)
+* [Minio Server](https://hub.docker.com/r/minio/minio/)
+
+* [Minio Client](https://docs.minio.io/docs/minio-client-quickstart-guide)
 
 * [S3 CLI](https://aws.amazon.com/cli/)
 
 * [S3 GUI](https://cyberduck.io)
-
-* [openssl-alpine](https://github.com/gitphill/openssl-alpine)
