@@ -32,32 +32,31 @@ Install
 
     brew install minio/stable/mc
 
-Config
+Configure
 
     ACCESS_KEY=CHANGEME
     SECRET_KEY=CHANGEME
     mc config host add s3 https://localhost $ACCESS_KEY $SECRET_KEY --api S3v4
 
-
     Added `s3` successfully.
 
 Commands
 
-    New Bucket
+New Bucket
 
-        mc mb s3/mybucket-from-mc
-    
-    Copy
+    mc mb s3/mybucket-from-mc
 
-        mc cp /etc/hosts s3/mybucket-from-mc
+Copy
 
-    List
+    mc cp /etc/hosts s3/mybucket-from-mc
 
-        mc ls s3
+List
 
-    Remove
+    mc ls s3
 
-        mc rm --force --recursive s3/mybucket-from-mc/
+Remove
+
+    mc rm --force --recursive s3/mybucket-from-mc/
 
 ## Amazon
 
