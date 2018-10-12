@@ -82,9 +82,9 @@ Remove
 
     aws --endpoint-url https://localhost s3 rm --recursive s3://mybucket-from-aws/ --no-verify-ssl
 
-CyberDuck (S3 Client)
+## CyberDuck 
 
-Connection 
+AWS S3 Connection 
 
 ![](doc/cyberduck-s3-connection.png)
 
